@@ -5,11 +5,12 @@
     
         var tenkeyTemplate = _.template((function () {/*
             <table id="<%= id %>">
-                <tbody>
-                    <tr><td colspan="2" id="close">X</td></tr>
-                    <tr><td id="tenkey-7">7</td><td id="tenkey-8">8</td><td id="tenkey-9">9</td></tr>
-                    <tr><td id="tenkey-8">4</td><td id="tenkey-5">5</td><td id="tenkey-6">6</td></tr>
-                    <tr><td id="tenkey-1">1</td><td id="tenkey=2">2</td><td id="tenkey-3">3</td></tr>
+                <tbody class="table">
+                    <tr scope="row"><td id="tenkey-close" colspan="4" style="text-align:right;">X</td></tr>
+                    <tr scope="row"><td>&nbsp;</td><td id="tenkey-/">/</td><td id="tenkey-*">*</td><td id="tenkey-backspace">BS</td></tr>
+                    <tr scope="row"><td id="tenkey-7">7</td><td id="tenkey-8">8</td><td id="tenkey-9">9</td><td id="tenkey--">-</td></tr>
+                    <tr scope="row"><td id="tenkey-8">4</td><td id="tenkey-5">5</td><td id="tenkey-6">6</td><td id="tenkey-+">+</td></tr>
+                    <tr scope="row"><td id="tenkey-1">1</td><td id="tenkey=2">2</td><td id="tenkey-3">3</td><td id="tenkey-enter">↓</td></tr>
                 </tbody>
             </table>
         */}).toString().match(/(?:\/\*(?:[\s\S]*?)\*\/)/).pop().replace(/^\/\*/, "").replace(/\*\/$/, ""));
@@ -24,6 +25,8 @@
 
         function startUp(e) {
             var elm = e.target;
+            e.preventDefault();
+            //elm.blur(); // TODO 常にキーボを出さないようになる。。。いいのか？
             if (elm.uuid !== undefined) return;
 
             var uuid = getUniqueStr();
@@ -33,19 +36,24 @@
             div.innerHTML = tenkeyTemplate({'id': uuid});
 
             div.addEventListener('click', function(ev) {
-                switch(true) {
-                    case ev.target.id === 'close':
+                switch(ev.target.id.replace('tenkey-', '')) {
+                    case 'close':
                         end({'target': elm});
                         break;
-                    case ev.target.id.startsWith('tenkey-'):
+                    case 'backspace':
+                        elm.value = elm.value.slice(0, -1);
+                        break;
+                    case 'enter':
+                        break;
+                    default:
                         var num = ev.target.id.slice(-1);
                         elm.value += num;
-                    default:
+                        break;
                 }
+                elm.focus();
             });
 
-            elm.parentNode.insertBefore(div, elm.nextSibling); 
-            elm.blur();
+            elm.parentNode.insertBefore(div, elm.nextSibling);
         }
 
         function end(e) {
