@@ -6,7 +6,7 @@
         var tenKeys = document.getElementsByClassName(className);
     
         var tenkeyTemplate = _.template((function () {/*
-            <table id="<%= id %>">
+            <table id="<%= id %>" style="position: absolute; background-color: white;">
                 <tbody class="table">
                     <tr scope="row"><td id="tenkey-close" colspan="4" style="text-align:right;">X</td></tr>
                     <tr scope="row"><td>&nbsp;</td><td id="tenkey-/">/</td><td id="tenkey-*">*</td><td id="tenkey-backspace">BS</td></tr>
@@ -27,14 +27,15 @@
 
         function startUp(e) {
             var elm = e.target;
-            e.preventDefault();
-            //elm.blur(); // TODO 常にキーボを出さないようになる。。。いいのか？
+            elm.blur(); // TODO キーボードは完全に抑止される。
             if (elm.uuid !== undefined) return;
 
             var uuid = getUniqueStr();
             elm.uuid = uuid;
 
             var div = document.createElement('div');
+            div.style.display = "inline";
+            div.style.position = "relative";
             div.innerHTML = tenkeyTemplate({'id': uuid});
 
             div.addEventListener(tapevent, function(ev) {
@@ -52,7 +53,6 @@
                         elm.value += num;
                         break;
                 }
-                elm.focus();
             });
 
             elm.parentNode.insertBefore(div, elm.nextSibling);
