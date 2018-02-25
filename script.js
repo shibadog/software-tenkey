@@ -1,4 +1,6 @@
 !(function(window, document, _) {
+    var tapevent = 'ontouchstart' in window ? 'touchend' : 'click';
+
     window.TenKey = function(className) {
         var className = typeof className !== 'undefined' ?  className : 'ten-key';
         var tenKeys = document.getElementsByClassName(className);
@@ -35,11 +37,11 @@
             var div = document.createElement('div');
             div.innerHTML = tenkeyTemplate({'id': uuid});
 
-            div.addEventListener('click', function(ev) {
+            div.addEventListener(tapevent, function(ev) {
                 switch(ev.target.id.replace('tenkey-', '')) {
                     case 'close':
                         end({'target': elm});
-                        break;
+                        return;
                     case 'backspace':
                         elm.value = elm.value.slice(0, -1);
                         break;
