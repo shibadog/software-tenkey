@@ -45,7 +45,7 @@
             });
 
             elm.parentNode.insertBefore(div, elm.nextSibling); 
-            div.focus();
+            elm.blur();
         }
 
         function end(e) {
