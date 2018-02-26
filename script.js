@@ -11,7 +11,7 @@
                     <tr scope="row"><td id="tenkey-close" colspan="4" style="text-align:right;">X</td></tr>
                     <tr scope="row"><td>&nbsp;</td><td id="tenkey-/">/</td><td id="tenkey-*">*</td><td id="tenkey-backspace">BS</td></tr>
                     <tr scope="row"><td id="tenkey-7">7</td><td id="tenkey-8">8</td><td id="tenkey-9">9</td><td id="tenkey--">-</td></tr>
-                    <tr scope="row"><td id="tenkey-8">4</td><td id="tenkey-5">5</td><td id="tenkey-6">6</td><td id="tenkey-+">+</td></tr>
+                    <tr scope="row"><td id="tenkey-4">4</td><td id="tenkey-5">5</td><td id="tenkey-6">6</td><td id="tenkey-+">+</td></tr>
                     <tr scope="row"><td id="tenkey-1">1</td><td id="tenkey=2">2</td><td id="tenkey-3">3</td><td id="tenkey-enter">↓</td></tr>
                 </tbody>
             </table>
