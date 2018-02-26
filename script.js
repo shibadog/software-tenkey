@@ -54,6 +54,7 @@
                         break;
                 }
             });
+            div.addEventListener('touchend', doubleTapKiller);
 
             elm.parentNode.insertBefore(div, elm.nextSibling);
         }
@@ -62,6 +63,14 @@
             var id = e.target.uuid;
             e.target.uuid = undefined;
             document.getElementById(id).remove();
+        }
+
+        function doubleTapKiller(e) {
+            var now = new Date().getTime();
+            if ((now - t) < 350){
+              e.preventDefault();
+            }
+            t = now;
         }
     };
 
