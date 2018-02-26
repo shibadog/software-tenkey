@@ -6,7 +6,16 @@
         var tenKeys = document.getElementsByClassName(className);
     
         var tenkeyTemplate = _.template((function () {/*
-            <table id="<%= id %>" style="position: absolute; background-color: white;">
+            <table id="<%= id %>" style="
+                position: absolute;
+                background-color: white;
+                width: 10em;
+                table-layout: fixed;
+                -ms-user-select: none;
+                -moz-user-select: -moz-none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                user-select: none;">
                 <tbody class="table">
                     <tr scope="row"><td id="tenkey-close" colspan="4" style="text-align:right;">X</td></tr>
                     <tr scope="row"><td>&nbsp;</td><td id="tenkey-/">/</td><td id="tenkey-*">*</td><td id="tenkey-backspace">BS</td></tr>
